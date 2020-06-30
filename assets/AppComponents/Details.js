@@ -27,7 +27,7 @@ export default class Details extends React.Component{
                 return <Text key={key}>{value}</Text>
             })
             let comments = Object.entries(this.state.detail.ratings).map(([key,value])=>{
-                return <Card>
+                return <Card style = {Styles.cardView}>
                     <Text>{this.state.detail.ratings.comment}</Text>
                     <Rating 
                     type='custom'
@@ -55,7 +55,7 @@ export default class Details extends React.Component{
                         <View>{allergene}</View>
                     </Overlay>
                     <Divider style={Styles.divider}/>
-                    <Text>Bewertungen</Text>
+                    <Text style = {Styles.text2}>Bewertungen</Text>
                     <Button
                     title="Eigene Bewertung abgeben"
                     onPress={() =>
@@ -68,6 +68,7 @@ export default class Details extends React.Component{
                         {comments}
                     </View>
                 </ScrollView>
+                    
             )
         }
         return(
@@ -94,6 +95,7 @@ const Styles = StyleSheet.create({
     },
     text2:{
         fontSize: 16,
+        fontWeight: "bold",
         fontFamily: "Roboto",
         alignSelf: "center",
         textAlign: "center",
@@ -108,10 +110,14 @@ const Styles = StyleSheet.create({
     divider:{
         margin:10,
         height: 1,
-        backgroundColor:'blue'
+        backgroundColor:'#DEDEDE'
     },
     rating: {
         marginTop: 15,
         marginBottom: 10
     },
+    cardView: {
+        paddingBottom: 5,
+        marginTop: 5
+    }
 })
