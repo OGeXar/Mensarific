@@ -42,7 +42,7 @@ export default class MensaCards extends React.Component{
 const Styles = StyleSheet.create({
     containerStyle:{
         borderRadius:5,
-        backgroundColor: '#DEDEDE',
+        backgroundColor: '#FFFFFF',
     },
     defaultText:{
         fontSize: 14,
