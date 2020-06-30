@@ -5,7 +5,7 @@ export default class HomeScreen extends React.Component{
     render(){
         return(
             <ScrollView>
-                <Details navigation={this.props.navigation}/>
+                <Details navigation={this.props.navigation} route={this.props.route}/>
             </ScrollView>
         )
     }

@@ -22,7 +22,7 @@ export default class App extends React.Component {
           <Stack.Screen
             name="Home"
             component={HomeScreen}
-            options={{ title: 'Welcome' }}
+            options={{ title: 'Mensarific' }}
           />
           <Stack.Screen 
             name="Menu"

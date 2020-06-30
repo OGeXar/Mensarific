@@ -1,60 +1,61 @@
 import React from 'react';
 import { StyleSheet,ScrollView,View, Text} from 'react-native';
 import { Card, ListItem, Button, Icon, Image, Rating, AirbnbRating } from 'react-native-elements'
+import Firebase from '../../constants/Firebase';
 
 
-const menu = [
-    {id: 'Montag', food:'Montag'},
-    {id: 'Dienstag', food:'Taco Tuesday'},
-    {id: 'Mittwoch', food:'Mittwoch'},
-    {id: 'Donnerstag', food:'Doenerstag'},
-    {id: 'Freitag', food:'Freitag'},
-]
-
-const images_food = {
-    Montag: "https://image.kurier.at/images/cfs_landscape_616w_347h/2335737/297867683.jpg",
-    Dienstag: "https://purelimon.de/wp-content/uploads/2019/07/Einfaches-Rezept-f%C3%BCr-vegane-Tacos.jpg",
-    Mittwoch: "https://images.lecker.de/,id=af97db8b,b=lecker,w=610,cg=c.jpg",
-    Donnerstag: "https://www.sueddeutsche.de/image/sz.1.4927703/640x360?v=1591287302",
-    Freitag: "https://bit.ly/2NUlRIN"
-}
-
-const beschreibung_food = {
-    Montag: "Burger mit Pommes",
-    Dienstag: "Tacos",
-    Mittwoch: "Lachs mit Kartoffeln",
-    Donnerstag: "Döner",
-    Freitag: "Pizza"
-}
 
 export default class MenuCards extends React.Component{
     constructor(props){
         super(props);
+        this.state={
+            foodCards: null
+        }
     }
     render(){
-        const foodCards = menu.map(food=>{
-            return <Card key={food.id} title={food.food} titleStyle = {Styles.title} containerStyle={Styles.card}>
-                        <ScrollView>
-                            <Image source = {{uri: images_food[food.id]}} style = {Styles.image}/>  
-                            <Text style = {Styles.text}> {beschreibung_food[food.id]} <Text> 5,00€ </Text> </Text>
-                            <Rating 
-                                type='custom' 
-                                imageSize={30} 
-                                readonly
-                                style = {Styles.rating} />
-                            <Button buttonStyle = {Styles.button}
-                                title="Details"
-                                onPress={() =>
-                                    this.props.navigation.navigate('Detail',{
-                                    })
-                                }
-                            />
-                        </ScrollView>
-                    </Card>
+        const db = Firebase.database();
+        
+        db.ref('/menues/').set({
+            wochenTag1:{id: 'Montag', title:'Montag', image:"https://image.kurier.at/images/cfs_landscape_616w_347h/2335737/297867683.jpg", description: "Burger mit Pommes", allergene:{allergen1:"Ei",allergen2:"Haselnuss",allergen3:'Laktose',allergen4:'Nuesse'}},
+            wochenTag2:{id: 'Dienstag', title:'Taco Tuesday', image:"https://purelimon.de/wp-content/uploads/2019/07/Einfaches-Rezept-f%C3%BCr-vegane-Tacos.jpg", description: "Tacos",allergene:{allergen1:"Ei",allergen2:"Haselnuss",allergen3:'Laktose',allergen4:'Nuesse'}},
+            wochenTag3:{id: 'Mittwoch', title:'Mittwoch', image: "https://images.lecker.de/,id=af97db8b,b=lecker,w=610,cg=c.jpg", description: "Lachs mit Kartoffeln",allergene:{allergen1:"Ei",allergen2:"Haselnuss",allergen3:'Laktose',allergen4:'Nuesse'}},
+            wochenTag4:{id: 'Donnerstag', title:'Dönerstag', image:"https://www.sueddeutsche.de/image/sz.1.4927703/640x360?v=1591287302", description: "Döner",allergene:{allergen1:"Ei",allergen2:"Haselnuss",allergen3:'Laktose',allergen4:'Nuesse'}},
+            wochenTag5:{id: 'Freitag', title:'Freitag', image:"https://bit.ly/2NUlRIN", description: "Pizza",allergene:{allergen1:"Ei",allergen2:"Haselnuss",allergen3:'Laktose',allergen4:'Nuesse'}}
         })
+        if(this.state.foodCards===null){
+            db.ref('/menues/').once('value').then(response=>{
+                return response.toJSON()
+            }).then(data=>{
+                let tmp = Object.entries(data).map(([key, value])=>{
+                    return <Card key={value.id} title={value.title} titleStyle = {Styles.title} containerStyle={Styles.card}>
+                            <ScrollView>
+                                <Image source = {{uri: value.image}} style = {Styles.image}/>  
+                                <Text style = {Styles.text}> {value.description} 5,00€  </Text>
+                                <Rating 
+                                    type='custom' 
+                                    imageSize={30} 
+                                    readonly
+                                    style = {Styles.rating} />
+                                <Button buttonStyle = {Styles.button}
+                                    title="Details"
+                                    onPress={() =>
+                                        this.props.navigation.navigate('Detail',{
+                                            menuID: key
+                                        })
+                                    }
+                                />
+                            </ScrollView>
+                        </Card>
+                })
+                this.setState({
+                    foodCards:tmp
+                })
+            })
+        }
+
         return(
             <ScrollView style = {Styles.backgroudView}>
-                {foodCards}
+                {this.state.foodCards}
             </ScrollView>
         )
     }

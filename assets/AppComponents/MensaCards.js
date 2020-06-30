@@ -14,19 +14,17 @@ export default class MensaCards extends React.Component{
 
     render(){
         const db = Firebase.database();
-        /*db.ref('/mensen/').set({
+        db.ref('/mensen/').set({
             mensa1:{id:'mensa1', name:"Mensaria im Schloss", image:"https://www.jobs-studentenwerke.de/sites/default/files/styles/logo_studentenwerk/public/user-files/Studierendenwerk%20Mannheim/logos/logostwma.png?itok=B2LojiqU"},
             mensa2:{id:'mensa2', name:"Mensaria Metropol", image:"https://designbuero-mesch.de/assets/portfolio/cd/cd-metropol-1.jpg"},
             mensa3:{id:'mensa3', name:"Cafeteria Horizonte", image:"https://www.stw-ma.de/cafeteria_horizonte-dir--height-404-width-620/_/IMG_6698.jpg"}
-        })*/
+        })
         
         if(this.state.cards===null){
-            db.ref('/mensen').once('value').then(response =>{
+            db.ref('/mensen/').once('value').then(response =>{
                 return response.toJSON();
             }).then(data=>{
                 let tmp= Object.entries(data).map(([key, value])=>{
-                console.log('Key',key)
-                console.log('value',value)
                 return  <Card key={value.id} title={value.name} titleStyle = {Styles.title} containerStyle={Styles.containerStyle}>
                             <ScrollView>
                                 <Image source = {{uri: value.image}} style = {Styles.image}/>
