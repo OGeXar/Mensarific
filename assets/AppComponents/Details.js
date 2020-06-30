@@ -62,8 +62,8 @@ export default class Details extends React.Component{
                     <Button 
                     title="Eigene Bewertung abgeben"
                     onPress={() =>
-                        this.setState({
-                            overlay: false
+                        this.props.navigation.navigate('Rating',{
+                            menuID: this.props.route.params.menuID
                         })
                     }
                     />
@@ -123,9 +123,10 @@ const Styles = StyleSheet.create({
         marginTop: 5
     },
     comment: {
+        flex: 1,
         marginBottom: 0,
         paddingBottom: 12,
-        flex: 1
+        
     },
     rating_comments: {
         marginTop: 5,

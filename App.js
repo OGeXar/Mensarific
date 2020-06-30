@@ -9,6 +9,7 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import HomeScreen from './screens/HomeScreen';
 import MenuScreen from './screens/MenuScreen';
 import DetailScreen from './screens/DetailScreen';
+import RatingScreen from './screens/RatingScreen';
 const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
 export default class App extends React.Component {
@@ -33,6 +34,11 @@ export default class App extends React.Component {
             name="Detail"
             component={DetailScreen}
             options={{title:'Detail'}}
+          />
+          <Stack.Screen 
+            name="Rating"
+            component={RatingScreen}
+            options={{title:'Rating'}}
           />
         </Stack.Navigator>
       </NavigationContainer>
