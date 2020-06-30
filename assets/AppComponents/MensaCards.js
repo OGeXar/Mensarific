@@ -1,39 +1,51 @@
 import React from 'react';
 import { StyleSheet,View, Text,ScrollView} from 'react-native';
+import Firebase from '../../constants/Firebase';
 
 import { Card, ListItem, Button, Icon, Image } from 'react-native-elements'
-const mensen = [
-    {id: 'mensa1', name: 'Mensaria im Schloss'},
-    {id: 'mensa2', name: 'Mensaria Metropol'},
-    {id: 'mensa3', name: 'Cafeteria Horizonte'}
-]
+
 export default class MensaCards extends React.Component{
     constructor(props){
         super(props);
-      }
+        this.state={
+            cards: null
+        }
+    }
+
     render(){
-        console.log(this.props.navigation)
         const images = {
             mensa1: "https://bit.ly/2Vx69qX",
             mensa2: "https://designbuero-mesch.de/assets/portfolio/cd/cd-metropol-1.jpg",
             mensa3: "https://www.stw-ma.de/cafeteria_horizonte-dir--height-404-width-620/_/IMG_6698.jpg"
         }
-        const cards = mensen.map(mensa=>{
-            return  <Card key={mensa.id} title={mensa.name} titleStyle = {Styles.title} containerStyle={Styles.containerStyle}>
-                        <ScrollView>
-                            <Image source = {{uri: images[mensa.id]}} style = {Styles.image}/>
-                            <Button
-                                title="Angebot"
-                                onPress={() =>
-                                    this.props.navigation.navigate('Menu')
-                                }
-                            />
-                        </ScrollView>
-                    </Card>;
-        })
+        const db = Firebase.database();
+        if(this.state.cards===null){
+            db.ref('/mensen').once('value').then(response =>{
+                return response.toJSON();
+            }).then(data=>{
+                let tmp= Object.entries(data).map(([key, value])=>{
+                console.log('Key',key)
+                console.log('value',value)
+                return  <Card key={value.id} title={value.name} titleStyle = {Styles.title} containerStyle={Styles.containerStyle}>
+                            <ScrollView>
+                                <Image source = {{uri: images[value.id]}} style = {Styles.image}/>
+                                <Button
+                                    title="Angebot"
+                                    onPress={() =>
+                                        this.props.navigation.navigate('Menu')
+                                    }
+                                />
+                            </ScrollView>
+                        </Card>;
+                })
+                this.setState({
+                    cards: tmp
+                })
+            })
+        }
         return (
             <View style={Styles.backgroudView}>
-                 {cards}
+                 {this.state.cards}
             </View>
         )
     }

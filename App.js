@@ -15,9 +15,6 @@ export default class App extends React.Component {
   render() {
     const db = Firebase.database();
     db.ref('/test/').set({
-      user: 'test',
-      kek: 'fuck yeah',
-      Jens: 'wenn du das liest, bekommst n Bier ausgegeben von Flo!'
     })
     return (
       <NavigationContainer>
