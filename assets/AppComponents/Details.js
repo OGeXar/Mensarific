@@ -1,7 +1,8 @@
 import React from 'react';
 import { ActivityIndicator,StyleSheet,ScrollView,View, Text} from 'react-native';
-import { Card, ListItem, Button, Icon, Image,Overlay } from 'react-native-elements'
+import { Card, ListItem, Button, Icon, Image, Overlay, Input, Rating, AirbnbRating} from 'react-native-elements'
 import Firebase from '../../constants/Firebase';
+import { max } from 'react-native-reanimated';
 export default class Details extends React.Component{
     constructor(props){
         super(props);
@@ -26,9 +27,9 @@ export default class Details extends React.Component{
                 return <Text key={key}>{value}</Text>
             })
             return(
-                <ScrollView>
+                <ScrollView style = {Styles.scrollView}>
                     <Image source = {{uri: this.state.detail.image}} style = {Styles.image}/>
-                    <Text>{this.state.detail.description}</Text>
+                    <Text style = {Styles.text}>{this.state.detail.description}</Text>
                     <Button
                         title="Allergene"
                         onPress={() =>
@@ -37,12 +38,12 @@ export default class Details extends React.Component{
                             })
                         }
                         />
-                            <Overlay
-                                isVisible={this.state.overlay}
-                                onBackdropPress={() => this.setState({ overlay: false })}
-                            >
-                                <View>{allergene}</View>
-                            </Overlay>
+                    <Overlay
+                        isVisible={this.state.overlay}
+                        onBackdropPress={() => this.setState({ overlay: false })}
+                    >
+                        <View>{allergene}</View>
+                    </Overlay>
                 </ScrollView>
             )
         }
@@ -57,16 +58,32 @@ export default class Details extends React.Component{
 const Styles = StyleSheet.create({
     loadingContainer:{
         flex: 1,
-        justifyContent: 'center',
-        alignItems: 'center'
+    },
+    scrollView: {
+        backgroundColor: '#FFFFFF'
     },
     text:{
-        flex: 1,
-        justifyContent: 'center',
-        textAlign: 'center'
+        fontSize: 20,
+        fontWeight: "bold",
+        fontFamily: "Roboto",
+        alignSelf: "center",
+        marginBottom: 15
+    },
+    text2:{
+        fontSize: 16,
+        fontFamily: "Roboto",
+        alignSelf: "center",
+        textAlign: "center",
+        marginBottom: 5,
+        marginTop: 15
     },
     image: {
-        width: 300,
-        height: 150
+        borderWidth: 1,
+        height: 180,
+        marginBottom: 15
+    },
+    rating: {
+        marginTop: 15,
+        marginBottom: 10
     }
 })
