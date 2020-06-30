@@ -19,28 +19,6 @@ export default class App extends React.Component {
       kek: 'fuck yeah',
       Jens: 'wenn du das liest, bekommst n Bier ausgegeben von Flo!'
     })
-    /*<NavigationContainer>
-        <Stack.Navigator>
-          <Stack.Screen
-            name="Test"
-            component={TestComponent}
-            options={{ title: 'Welcome' }}
-          />
-        </Stack.Navigator>
-      </NavigationContainer> */
-      /* <NavigationContainer>
-      <Tab.Navigator>
-        <Tab.Screen 
-          name="Home"
-          component={TestComponent}
-          options={{title: 'Home'}}
-        />
-        <Tab.Screen 
-          name="Test"
-          component={TestTwoComponent}
-        />
-      </Tab.Navigator>
-      </NavigationContainer>*/
     return (
       <NavigationContainer>
         <Stack.Navigator>
@@ -62,7 +40,7 @@ export default class App extends React.Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
+    backgroundColor: '#C4C4C4',
     alignItems: 'center',
     justifyContent: 'center'
   }

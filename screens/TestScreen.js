@@ -9,12 +9,6 @@ export default class TestScreen extends React.Component{
         return(
             <View style={{paddingTop:20}}>
                 <TestComponent navigation={this.props.navigation}/>
-                <Button
-                    title="Go to Jane's profile"
-                    onPress={() =>
-                        this.props.navigation.navigate('TestTwo')
-                    }
-                />
             </View>
         )
     }
