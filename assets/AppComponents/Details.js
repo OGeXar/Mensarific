@@ -24,22 +24,22 @@ export default class Details extends React.Component{
             })
         }else{
             let allergene = Object.entries(this.state.detail.allergene).map(([key, value])=>{
-                return <Text key={key}>{value}</Text>
+                return <Text key={key} style = {Styles.text_allergene} >{value}</Text>
             })
             let comments = Object.entries(this.state.detail.ratings).map(([key,value])=>{
-                return <Card style = {Styles.cardView}>
+                return <Card containerStyle = {Styles.cardView}>
                     <Text>{this.state.detail.ratings.comment}</Text>
                     <Rating 
                     type='custom'
                     readonly
                     imageSize={30} 
-                    style = {Styles.rating_comments} />
+                    style = {Styles.rating_comments}/>
                 </Card>
             });
             return(
                 <ScrollView style = {Styles.scrollView}>
                     <Image source = {{uri: this.state.detail.image}} style = {Styles.image}/>
-                    <Text style = {Styles.text}>{this.state.detail.description}</Text>
+                    <Text style = {Styles.text_beschreibung}>{this.state.detail.description}</Text>
                     <Button
                     title="Allergene"
                     onPress={() =>
@@ -48,14 +48,14 @@ export default class Details extends React.Component{
                         })
                     }
                     />
-                    <Overlay
+                    <Overlay 
                         isVisible={this.state.overlay}
                         onBackdropPress={() => this.setState({ overlay: false })}
                     >
-                        <View>{allergene}</View>
+                        <View style = {Styles.overlay}>{allergene}</View>
                     </Overlay>
                     <Divider style={Styles.divider}/>
-                    <Text style = {Styles.text2}>Bewertungen</Text>
+                    <Text style = {Styles.text_bewertung}>Bewertungen</Text>
                     <Button 
                     title="Eigene Bewertung abgeben"
                     onPress={() =>
@@ -84,9 +84,19 @@ const Styles = StyleSheet.create({
     },
     scrollView: {
         backgroundColor: '#383F4A',
-        flex: 1
+        flex: 1,
     },
-    text:{
+    cardView: {
+        paddingBottom: 10,
+        marginTop: 10,
+        borderRadius: 5
+    },
+    comment: {
+        marginBottom: 0,
+        paddingBottom: 12,
+        flex: 1,
+    },
+    text_beschreibung:{
         fontSize: 20,
         fontWeight: "bold",
         fontFamily: "Roboto",
@@ -94,7 +104,7 @@ const Styles = StyleSheet.create({
         marginBottom: 15,
         color: 'white'
     },
-    text2:{
+    text_bewertung:{
         fontSize: 16,
         fontWeight: "bold",
         fontFamily: "Roboto",
@@ -103,6 +113,10 @@ const Styles = StyleSheet.create({
         marginBottom: 8,
         marginTop: 12,
         color: 'white'
+    },
+    text_allergene: {
+        color: '#383F4A',
+        fontSize: 18
     },
     image: {
         borderWidth: 1,
@@ -115,17 +129,15 @@ const Styles = StyleSheet.create({
         backgroundColor:'#DEDEDE',
         paddingBottom: 3
     },
-    cardView: {
-        paddingBottom: 5,
-        marginTop: 5
-    },
-    comment: {
-        marginBottom: 0,
-        paddingBottom: 12,
-        flex: 1
-    },
     rating_comments: {
         marginTop: 5,
         marginBottom: 5
+    },
+    overlay: {
+        padding: 5,
+        fontSize: 20,
+        fontFamily: "Roboto",
+        backgroundColor: '#FFFFFF',
+        color: '#383F4A'
     },
 })
