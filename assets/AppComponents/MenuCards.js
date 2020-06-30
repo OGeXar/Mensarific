@@ -1,6 +1,6 @@
 import React from 'react';
 import { StyleSheet,ScrollView,View, Text} from 'react-native';
-import { Card, ListItem, Button, Icon, Image } from 'react-native-elements'
+import { Card, ListItem, Button, Icon, Image, Rating, AirbnbRating } from 'react-native-elements'
 
 
 const menu = [
@@ -27,7 +27,6 @@ const beschreibung_food = {
     Freitag: "Pizza"
 }
 
-
 export default class MenuCards extends React.Component{
     constructor(props){
         super(props);
@@ -35,19 +34,23 @@ export default class MenuCards extends React.Component{
     render(){
         const foodCards = menu.map(food=>{
             return <Card key={food.id} title={food.food} titleStyle = {Styles.title} containerStyle={Styles.card}>
-                <ScrollView>
-                    <Text style = {Styles.text}> {beschreibung_food[food.id]}</Text>
-                    <Image source = {{uri: images_food[food.id]}} style = {Styles.image}/>
-                    <Button buttonStyle = {Styles.button}
-                        title="Details"
-                        onPress={() =>
-                            this.props.navigation.navigate('Detail',{
-
-                            })
-                        }
-                    />
-                </ScrollView>
-            </Card>
+                        <ScrollView>
+                            <Image source = {{uri: images_food[food.id]}} style = {Styles.image}/>  
+                            <Text style = {Styles.text}> {beschreibung_food[food.id]} <Text> 5,00€ </Text> </Text>
+                            <Rating 
+                                type='custom' 
+                                imageSize={30} 
+                                readonly
+                                style = {Styles.rating} />
+                            <Button buttonStyle = {Styles.button}
+                                title="Details"
+                                onPress={() =>
+                                    this.props.navigation.navigate('Detail',{
+                                    })
+                                }
+                            />
+                        </ScrollView>
+                    </Card>
         })
         return(
             <ScrollView style = {Styles.backgroudView}>
@@ -60,8 +63,7 @@ export default class MenuCards extends React.Component{
 const Styles = StyleSheet.create({
     card:{
         borderRadius:5,
-        backgroundColor: '#DEDEDE',
-        flexDirection: 'row'
+        backgroundColor: '#FFFFFF',
     },
     defaultText:{
         fontSize: 14,
@@ -78,20 +80,21 @@ const Styles = StyleSheet.create({
         backgroundColor: '#383F4A',
     },
     image: {
-        width: 150,
+        width: 300,
         height: 150,
-        marginLeft: 150,
-        flexDirection: 'row',
-        flexWrap: "wrap"
     },
     button: {
         fontWeight: "bold"
     },
     text: {
+        marginTop: 10,
+        marginBottom: 10,
         alignSelf: "flex-start",
         fontFamily: 'Roboto',
         marginLeft: 0,
-        flexDirection: 'row-reverse',
-        flexWrap: "wrap"
+        textAlign: "left"
+    },
+    rating: {
+        paddingBottom: 10
     }
 })
