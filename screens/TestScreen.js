@@ -1,5 +1,5 @@
 import React from 'react';
-import {View,Text} from 'react-native';
+import {View,Text,Button} from 'react-native';
 import { TestComponent } from '../assets/AppComponents';
 export default class TestScreen extends React.Component{
     static navigationOptions = {
@@ -8,7 +8,13 @@ export default class TestScreen extends React.Component{
     render(){
         return(
             <View style={{paddingTop:20}}>
-                <TestComponent/>
+                <TestComponent navigation={this.props.navigation}/>
+                <Button
+                    title="Go to Jane's profile"
+                    onPress={() =>
+                        this.props.navigation.navigate('TestTwo')
+                    }
+                />
             </View>
         )
     }

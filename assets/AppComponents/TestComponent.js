@@ -16,10 +16,20 @@ export default class TestComponent extends React.Component{
         }
       }
     render(){
+        console.log(this.props.navigation)
         const db = firebase.database();
-        db.ref
         const cards = mensen.map(mensa=>{
-            return <Card key={mensa.name} title={mensa.name} containerStyle={Styles.containerStyle}><View><Text style={Styles.defaultText}>{mensa.test}</Text></View></Card> 
+            return <Card key={mensa.name} title={mensa.name} containerStyle={Styles.containerStyle}>
+                <View>
+                    <Text style={Styles.defaultText}>{mensa.test}</Text>
+                    <Button
+                        title="Angebot"
+                        onPress={() =>
+                            this.props.navigation.navigate('TestTwo')
+                        }
+                    />
+                </View>
+            </Card>;
         })
         return (
             <View>
@@ -35,6 +45,6 @@ const Styles = StyleSheet.create({
     },
     defaultText:{
         fontSize: 14,
-        color: 'blue'
+        color: '#e26200'
     }
 })
