@@ -33,7 +33,7 @@ export default class Details extends React.Component{
                     type='custom'
                     readonly
                     imageSize={30} 
-                    style = {Styles.rating} />
+                    style = {Styles.rating_comments} />
                 </Card>
             });
             return(
@@ -56,7 +56,7 @@ export default class Details extends React.Component{
                     </Overlay>
                     <Divider style={Styles.divider}/>
                     <Text style = {Styles.text2}>Bewertungen</Text>
-                    <Button
+                    <Button 
                     title="Eigene Bewertung abgeben"
                     onPress={() =>
                         this.setState({
@@ -64,11 +64,10 @@ export default class Details extends React.Component{
                         })
                     }
                     />
-                    <View>
+                    <View style = {Styles.comment}>
                         {comments}
                     </View>
                 </ScrollView>
-                    
             )
         }
         return(
@@ -84,14 +83,16 @@ const Styles = StyleSheet.create({
         flex: 1,
     },
     scrollView: {
-        backgroundColor: '#FFFFFF'
+        backgroundColor: '#383F4A',
+        flex: 1
     },
     text:{
         fontSize: 20,
         fontWeight: "bold",
         fontFamily: "Roboto",
         alignSelf: "center",
-        marginBottom: 15
+        marginBottom: 15,
+        color: 'white'
     },
     text2:{
         fontSize: 16,
@@ -99,8 +100,9 @@ const Styles = StyleSheet.create({
         fontFamily: "Roboto",
         alignSelf: "center",
         textAlign: "center",
-        marginBottom: 5,
-        marginTop: 15
+        marginBottom: 8,
+        marginTop: 12,
+        color: 'white'
     },
     image: {
         borderWidth: 1,
@@ -108,16 +110,22 @@ const Styles = StyleSheet.create({
         marginBottom: 15
     },
     divider:{
-        margin:10,
+        marginTop: 10,
         height: 1,
-        backgroundColor:'#DEDEDE'
-    },
-    rating: {
-        marginTop: 15,
-        marginBottom: 10
+        backgroundColor:'#DEDEDE',
+        paddingBottom: 3
     },
     cardView: {
         paddingBottom: 5,
         marginTop: 5
-    }
+    },
+    comment: {
+        marginBottom: 0,
+        paddingBottom: 12,
+        flex: 1
+    },
+    rating_comments: {
+        marginTop: 5,
+        marginBottom: 5
+    },
 })
