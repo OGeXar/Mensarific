@@ -14,7 +14,7 @@ export default class MensaCards extends React.Component{
     render(){
         console.log(this.props.navigation)
         const images = {
-            mensa1: "https://bit.ly/2Vx69qX",
+            mensa1: "https://www.jobs-studentenwerke.de/sites/default/files/styles/logo_studentenwerk/public/user-files/Studierendenwerk%20Mannheim/logos/logostwma.png?itok=B2LojiqU",
             mensa2: "https://designbuero-mesch.de/assets/portfolio/cd/cd-metropol-1.jpg",
             mensa3: "https://www.stw-ma.de/cafeteria_horizonte-dir--height-404-width-620/_/IMG_6698.jpg"
         }
@@ -32,8 +32,8 @@ export default class MensaCards extends React.Component{
                     </Card>;
         })
         return (
-            <View style={Styles.backgroudView}>
-                 {cards}
+            <View   style={Styles.backgroudView}>
+                    {cards}
             </View>
         )
     }
@@ -60,7 +60,7 @@ const Styles = StyleSheet.create({
         flex: 1
     },
     image: {
-        width: 200,
+        width: 300,
         height: 150
     }
 })
