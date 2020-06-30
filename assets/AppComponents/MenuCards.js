@@ -44,8 +44,8 @@ export default class MenuCards extends React.Component{
                                         })
                                     }
                                 />
-                            </ScrollView>
-                        </Card>
+                             </ScrollView>
+                            </Card>
                 })
                 this.setState({
                     foodCards:tmp

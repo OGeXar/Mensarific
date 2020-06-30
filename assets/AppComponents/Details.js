@@ -46,10 +46,12 @@ export default class Details extends React.Component{
                         <View>{allergene}</View>
                     </Overlay>
                     <Divider style={Styles.divider}/>
-                    <Text>Bewertungen</Text>
-                    <ScrollView>
-                        {comments}
-                    </ScrollView>
+                    <Text style = {Styles.text2}>Bewertungen</Text>
+                    <Card style = {Styles.cardView}>
+                        <ScrollView>
+                            {comments}
+                        </ScrollView>
+                    </Card>
                 </View>
             )
         }
@@ -77,6 +79,7 @@ const Styles = StyleSheet.create({
     },
     text2:{
         fontSize: 16,
+        fontWeight: "bold",
         fontFamily: "Roboto",
         alignSelf: "center",
         textAlign: "center",
@@ -96,5 +99,9 @@ const Styles = StyleSheet.create({
     rating: {
         marginTop: 15,
         marginBottom: 10
+    },
+    cardView: {
+        paddingBottom: 5,
+        marginTop: 5
     }
 })
