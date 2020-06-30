@@ -16,7 +16,7 @@ export default class MenuCards extends React.Component{
         const db = Firebase.database();
         
         db.ref('/menues/').set({
-            wochenTag1:{id: 'Montag', title:'Montag', image:"https://image.kurier.at/images/cfs_landscape_616w_347h/2335737/297867683.jpg", description: "Burger mit Pommes", allergene:{allergen1:"Ei",allergen2:"Haselnuss",allergen3:'Laktose',allergen4:'Nuesse'}, ratings:{id:0, rating:0, comment:'test'}},
+            wochenTag1:{id: 'Montag', title:'Montag', image:"https://image.kurier.at/images/cfs_landscape_616w_347h/2335737/297867683.jpg", description: "Burger mit Pommes", allergene:{allergen1:"Ei",allergen2:"Haselnuss",allergen3:'Laktose',allergen4:'Nuesse'}, ratings:{id0:{id:0, rating:0, comment:'test'},id1:{id:1, rating:2, comment:'test2'}}},
             wochenTag2:{id: 'Dienstag', title:'Taco Tuesday', image:"https://purelimon.de/wp-content/uploads/2019/07/Einfaches-Rezept-f%C3%BCr-vegane-Tacos.jpg", description: "Tacos",allergene:{allergen1:"Ei",allergen2:"Haselnuss",allergen3:'Laktose',allergen4:'Nuesse'}},
             wochenTag3:{id: 'Mittwoch', title:'Mittwoch', image: "https://images.lecker.de/,id=af97db8b,b=lecker,w=610,cg=c.jpg", description: "Lachs mit Kartoffeln",allergene:{allergen1:"Ei",allergen2:"Haselnuss",allergen3:'Laktose',allergen4:'Nuesse'}},
             wochenTag4:{id: 'Donnerstag', title:'Dönerstag', image:"https://www.sueddeutsche.de/image/sz.1.4927703/640x360?v=1591287302", description: "Döner",allergene:{allergen1:"Ei",allergen2:"Haselnuss",allergen3:'Laktose',allergen4:'Nuesse'}},

@@ -27,15 +27,18 @@ export default class Details extends React.Component{
                 return <Text key={key}>{value}</Text>
             })
             let comments = Object.entries(this.state.detail.ratings).map(([key,value])=>{
-                return <Card style = {Styles.cardView}>
-                    <Text>{this.state.detail.ratings.comment}</Text>
+                console.log(value)
+                return <Card key={key} style = {Styles.cardView}>
+                    <Text>{value.comment}</Text>
                     <Rating 
                     type='custom'
                     readonly
-                    imageSize={30} 
+                    imageSize={30}
+                    startingValue={value.rating}
                     style = {Styles.rating} />
                 </Card>
             });
+            //console.log(this.props)
             return(
                 <ScrollView style = {Styles.scrollView}>
                     <Image source = {{uri: this.state.detail.image}} style = {Styles.image}/>
