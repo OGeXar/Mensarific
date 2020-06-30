@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Text } from 'react-native';
+import { StyleSheet,View, Text } from 'react-native';
 import ApiKeys from '../../constants/ApiKeys';
 import * as firebase from 'firebase';
 import { Card, ListItem, Button, Icon } from 'react-native-elements'
@@ -19,7 +19,7 @@ export default class TestComponent extends React.Component{
         const db = firebase.database();
         db.ref
         const cards = mensen.map(mensa=>{
-            return <Card key={mensa.name} title={mensa.name} containerStyle={{borderRadius:10}}><View><Text>{mensa.test}</Text></View></Card> 
+            return <Card key={mensa.name} title={mensa.name} containerStyle={Styles.containerStyle}><View><Text style={Styles.defaultText}>{mensa.test}</Text></View></Card> 
         })
         return (
             <View>
@@ -28,3 +28,13 @@ export default class TestComponent extends React.Component{
         )
     }
 }
+//styles so exportieren ist nice!
+const Styles = StyleSheet.create({
+    containerStyle:{
+        borderRadius:10
+    },
+    defaultText:{
+        fontSize: 14,
+        color: 'blue'
+    }
+})

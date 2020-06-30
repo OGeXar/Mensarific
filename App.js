@@ -2,21 +2,14 @@ import 'react-native-gesture-handler';
 import { StatusBar } from 'expo-status-bar';
 import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
-import ApiKeys from './constants/ApiKeys';
-import * as firebase from 'firebase';
+import Firebase from './constants/Firebase';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import { TestComponent } from './assets/AppComponents';
 const Stack = createStackNavigator();
 export default class App extends React.Component {
-  constructor(props){
-    super(props);
-    if(!firebase.apps.length){
-      firebase.initializeApp(ApiKeys.FirebaseConfig); 
-    }
-  }
   render() {
-    const db = firebase.database();
+    const db = Firebase.database();
     db.ref('/test/').set({
       user: 'test',
       kek: 'fuck yeah',
