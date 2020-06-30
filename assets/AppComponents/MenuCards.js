@@ -81,7 +81,7 @@ const Styles = StyleSheet.create({
         backgroundColor: '#383F4A',
     },
     image: {
-        width: 300,
+        borderWidth: 1,
         height: 150,
     },
     button: {

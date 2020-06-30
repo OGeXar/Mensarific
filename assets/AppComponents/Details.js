@@ -1,7 +1,8 @@
 import React from 'react';
 import { ActivityIndicator,StyleSheet,ScrollView,View, Text} from 'react-native';
-import { Card, ListItem, Button, Icon, Image,Overlay,Divider  } from 'react-native-elements'
+import { Card, ListItem, Button, Icon, Image, Overlay, Input, Rating, AirbnbRating,Divider} from 'react-native-elements'
 import Firebase from '../../constants/Firebase';
+import { max } from 'react-native-reanimated';
 export default class Details extends React.Component{
     constructor(props){
         super(props);
@@ -27,9 +28,9 @@ export default class Details extends React.Component{
             })
             let comments = null;
             return(
-                <View>
+                <View style = {Styles.scrollView}>
                     <Image source = {{uri: this.state.detail.image}} style = {Styles.image}/>
-                    <Text>{this.state.detail.description}</Text>
+                    <Text style = {Styles.text}>{this.state.detail.description}</Text>
                     <Button
                     title="Allergene"
                     onPress={() =>
@@ -63,21 +64,37 @@ export default class Details extends React.Component{
 const Styles = StyleSheet.create({
     loadingContainer:{
         flex: 1,
-        justifyContent: 'center',
-        alignItems: 'center'
+    },
+    scrollView: {
+        backgroundColor: '#FFFFFF'
     },
     text:{
-        flex: 1,
-        justifyContent: 'center',
-        textAlign: 'center'
+        fontSize: 20,
+        fontWeight: "bold",
+        fontFamily: "Roboto",
+        alignSelf: "center",
+        marginBottom: 15
+    },
+    text2:{
+        fontSize: 16,
+        fontFamily: "Roboto",
+        alignSelf: "center",
+        textAlign: "center",
+        marginBottom: 5,
+        marginTop: 15
     },
     image: {
-        width: 300,
-        height: 150
+        borderWidth: 1,
+        height: 180,
+        marginBottom: 15
     },
     divider:{
         margin:10,
         height: 1,
         backgroundColor:'blue'
+    },
+    rating: {
+        marginTop: 15,
+        marginBottom: 10
     }
 })
