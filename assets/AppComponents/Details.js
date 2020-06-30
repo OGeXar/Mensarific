@@ -26,9 +26,18 @@ export default class Details extends React.Component{
             let allergene = Object.entries(this.state.detail.allergene).map(([key, value])=>{
                 return <Text key={key}>{value}</Text>
             })
-            let comments = null;
+            let comments = Object.entries(this.state.detail.ratings).map(([key,value])=>{
+                return <Card>
+                    <Text>{this.state.detail.ratings.comment}</Text>
+                    <Rating 
+                    type='custom'
+                    readonly
+                    imageSize={30} 
+                    style = {Styles.rating} />
+                </Card>
+            });
             return(
-                <View style = {Styles.scrollView}>
+                <ScrollView style = {Styles.scrollView}>
                     <Image source = {{uri: this.state.detail.image}} style = {Styles.image}/>
                     <Text style = {Styles.text}>{this.state.detail.description}</Text>
                     <Button
@@ -47,10 +56,18 @@ export default class Details extends React.Component{
                     </Overlay>
                     <Divider style={Styles.divider}/>
                     <Text>Bewertungen</Text>
-                    <ScrollView>
+                    <Button
+                    title="Eigene Bewertung abgeben"
+                    onPress={() =>
+                        this.setState({
+                            overlay: false
+                        })
+                    }
+                    />
+                    <View>
                         {comments}
-                    </ScrollView>
-                </View>
+                    </View>
+                </ScrollView>
             )
         }
         return(
@@ -96,5 +113,5 @@ const Styles = StyleSheet.create({
     rating: {
         marginTop: 15,
         marginBottom: 10
-    }
+    },
 })
