@@ -13,12 +13,13 @@ export default class MensaCards extends React.Component{
     }
 
     render(){
-        const images = {
-            mensa1: "https://www.jobs-studentenwerke.de/sites/default/files/styles/logo_studentenwerk/public/user-files/Studierendenwerk%20Mannheim/logos/logostwma.png?itok=B2LojiqU",
-            mensa2: "https://designbuero-mesch.de/assets/portfolio/cd/cd-metropol-1.jpg",
-            mensa3: "https://www.stw-ma.de/cafeteria_horizonte-dir--height-404-width-620/_/IMG_6698.jpg"
-        }
         const db = Firebase.database();
+        /*db.ref('/mensen/').set({
+            mensa1:{id:'mensa1', name:"Mensaria im Schloss", image:"https://www.jobs-studentenwerke.de/sites/default/files/styles/logo_studentenwerk/public/user-files/Studierendenwerk%20Mannheim/logos/logostwma.png?itok=B2LojiqU"},
+            mensa2:{id:'mensa2', name:"Mensaria Metropol", image:"https://designbuero-mesch.de/assets/portfolio/cd/cd-metropol-1.jpg"},
+            mensa3:{id:'mensa3', name:"Cafeteria Horizonte", image:"https://www.stw-ma.de/cafeteria_horizonte-dir--height-404-width-620/_/IMG_6698.jpg"}
+        })*/
+        
         if(this.state.cards===null){
             db.ref('/mensen').once('value').then(response =>{
                 return response.toJSON();
@@ -28,7 +29,7 @@ export default class MensaCards extends React.Component{
                 console.log('value',value)
                 return  <Card key={value.id} title={value.name} titleStyle = {Styles.title} containerStyle={Styles.containerStyle}>
                             <ScrollView>
-                                <Image source = {{uri: images[value.id]}} style = {Styles.image}/>
+                                <Image source = {{uri: value.image}} style = {Styles.image}/>
                                 <Button
                                     title="Angebot"
                                     onPress={() =>
