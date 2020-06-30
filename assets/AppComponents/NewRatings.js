@@ -56,14 +56,14 @@ export default class NewRatings extends React.Component{
         }else{
             
             return(
-                <ScrollView>
+                <ScrollView style = {Styles.scrollView}>
                     <Image source = {{uri: this.state.detail.image}} style = {Styles.image}/>
                     <Text style = {Styles.text_beschreibung}>{this.state.detail.description}</Text>
                     <Rating
                     onFinishRating={this.ratingCompleted}
                     style={{ paddingVertical: 10 }}
                     />
-                    <Input placeholder='TEST' onChange={this.handleInput}/>
+                    <Input placeholder='Teile und deine Meinung mit!' onChange={this.handleInput}/>
                     <Button
                         title="Abschicken"
                         onPress={this.handleSubmit}
@@ -95,5 +95,9 @@ const Styles = StyleSheet.create({
         alignSelf: "center",
         marginBottom: 15,
         color: 'white'
+    },
+    scrollView: {
+        backgroundColor: '#383F4A',
+        flex: 1,
     },
 })
