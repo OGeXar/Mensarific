@@ -1,24 +1,18 @@
 import React from 'react';
-import { StyleSheet,View, Text} from 'react-native';
-import ApiKeys from '../../constants/ApiKeys';
-import * as firebase from 'firebase';
+import { StyleSheet,View, Text,ScrollView} from 'react-native';
+
 import { Card, ListItem, Button, Icon, Image } from 'react-native-elements'
 const mensen = [
     {id: 'mensa1', name: 'Mensaria im Schloss'},
     {id: 'mensa2', name: 'Mensaria Metropol'},
     {id: 'mensa3', name: 'Cafeteria Horizonte'}
 ]
-export default class TestComponent extends React.Component{
+export default class MensaCards extends React.Component{
     constructor(props){
         super(props);
-        if(!firebase.apps.length){
-          firebase.initializeApp(ApiKeys.FirebaseConfig); 
-        }
       }
     render(){
         console.log(this.props.navigation)
-        const db = firebase.database();
-       
         const images = {
             mensa1: "https://bit.ly/2Vx69qX",
             mensa2: "https://designbuero-mesch.de/assets/portfolio/cd/cd-metropol-1.jpg",
@@ -26,15 +20,15 @@ export default class TestComponent extends React.Component{
         }
         const cards = mensen.map(mensa=>{
             return  <Card key={mensa.id} title={mensa.name} titleStyle = {Styles.title} containerStyle={Styles.containerStyle}>
-                        <View>
+                        <ScrollView>
                             <Image source = {{uri: images[mensa.id]}} style = {Styles.image}/>
                             <Button
                                 title="Angebot"
                                 onPress={() =>
-                                    this.props.navigation.navigate('TestTwo')
+                                    this.props.navigation.navigate('Menu')
                                 }
                             />
-                        </View>
+                        </ScrollView>
                     </Card>;
         })
         return (
@@ -48,7 +42,7 @@ export default class TestComponent extends React.Component{
 const Styles = StyleSheet.create({
     containerStyle:{
         borderRadius:5,
-        backgroundColor: '#DEDEDE'
+        backgroundColor: '#DEDEDE',
     },
     defaultText:{
         fontSize: 14,

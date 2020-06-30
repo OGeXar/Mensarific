@@ -6,9 +6,9 @@ import Firebase from './constants/Firebase';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import { TestComponent } from './assets/AppComponents';
-import { TestTwoComponent } from './assets/AppComponents';
-import TestScreen from './screens/TestScreen';
+import HomeScreen from './screens/HomeScreen';
+import MenuScreen from './screens/MenuScreen';
+import DetailScreen from './screens/DetailScreen';
 const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
 export default class App extends React.Component {
@@ -23,14 +23,19 @@ export default class App extends React.Component {
       <NavigationContainer>
         <Stack.Navigator>
           <Stack.Screen
-            name="Test"
-            component={TestScreen}
+            name="Home"
+            component={HomeScreen}
             options={{ title: 'Welcome' }}
           />
           <Stack.Screen 
-            name="TestTwo"
-            component={TestTwoComponent}
-            options={{title:'hier kommt das Profil hin'}}
+            name="Menu"
+            component={MenuScreen}
+            options={{title:'Menu'}}
+          />
+          <Stack.Screen 
+            name="Detail"
+            component={DetailScreen}
+            options={{title:'Detail'}}
           />
         </Stack.Navigator>
       </NavigationContainer>
