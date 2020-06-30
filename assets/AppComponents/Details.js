@@ -1,6 +1,6 @@
 import React from 'react';
 import { ActivityIndicator,StyleSheet,ScrollView,View, Text} from 'react-native';
-import { Card, ListItem, Button, Icon, Image,Overlay } from 'react-native-elements'
+import { Card, ListItem, Button, Icon, Image,Overlay,Divider  } from 'react-native-elements'
 import Firebase from '../../constants/Firebase';
 export default class Details extends React.Component{
     constructor(props){
@@ -25,25 +25,31 @@ export default class Details extends React.Component{
             let allergene = Object.entries(this.state.detail.allergene).map(([key, value])=>{
                 return <Text key={key}>{value}</Text>
             })
+            let comments = null;
             return(
-                <ScrollView>
+                <View>
                     <Image source = {{uri: this.state.detail.image}} style = {Styles.image}/>
                     <Text>{this.state.detail.description}</Text>
                     <Button
-                        title="Allergene"
-                        onPress={() =>
-                            this.setState({
-                                overlay: true
-                            })
-                        }
-                        />
-                            <Overlay
-                                isVisible={this.state.overlay}
-                                onBackdropPress={() => this.setState({ overlay: false })}
-                            >
-                                <View>{allergene}</View>
-                            </Overlay>
-                </ScrollView>
+                    title="Allergene"
+                    onPress={() =>
+                        this.setState({
+                            overlay: true
+                        })
+                    }
+                    />
+                    <Overlay
+                        isVisible={this.state.overlay}
+                        onBackdropPress={() => this.setState({ overlay: false })}
+                    >
+                        <View>{allergene}</View>
+                    </Overlay>
+                    <Divider style={Styles.divider}/>
+                    <Text>Bewertungen</Text>
+                    <ScrollView>
+                        {comments}
+                    </ScrollView>
+                </View>
             )
         }
         return(
@@ -68,5 +74,10 @@ const Styles = StyleSheet.create({
     image: {
         width: 300,
         height: 150
+    },
+    divider:{
+        margin:10,
+        height: 1,
+        backgroundColor:'blue'
     }
 })
